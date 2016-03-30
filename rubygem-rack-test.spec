@@ -4,7 +4,7 @@
 #
 Name     : rubygem-rack-test
 Version  : 0.6.3
-Release  : 4
+Release  : 5
 URL      : https://rubygems.org/downloads/rack-test-0.6.3.gem
 Source0  : https://rubygems.org/downloads/rack-test-0.6.3.gem
 Summary  : No detailed summary available
@@ -13,6 +13,7 @@ License  : MIT
 BuildRequires : ruby
 BuildRequires : rubygem-rack
 BuildRequires : rubygem-rdoc
+BuildRequires : rubygem-rspec-core
 
 %description
 = Rack::Test {<img src="https://codeclimate.com/github/brynary/rack-test.png" />}[https://codeclimate.com/github/brynary/rack-test] {<img src="https://codeclimate.com/github/brynary/rack-test/coverage.png" />}[https://codeclimate.com/github/brynary/rack-test]
@@ -26,17 +27,17 @@ gem spec %{SOURCE0} -l --ruby > rubygem-rack-test.gemspec
 gem build rubygem-rack-test.gemspec
 
 %install
-gem_dir=$(ruby -e'puts Gem.default_dir')
+%global gem_dir $(ruby -e'puts Gem.default_dir')
 gem install -V \
 --local \
 --force \
---install-dir .${gem_dir} \
+--install-dir .%{gem_dir} \
 --bindir .%{_bindir} \
 rack-test-0.6.3.gem
 
-mkdir -p %{buildroot}${gem_dir}
-cp -pa .${gem_dir}/* \
-%{buildroot}${gem_dir}
+mkdir -p %{buildroot}%{gem_dir}
+cp -pa .%{gem_dir}/* \
+%{buildroot}%{gem_dir}
 
 if [ -d .%{_bindir} ]; then
 mkdir -p %{buildroot}%{_bindir}
@@ -44,81 +45,38 @@ cp -pa .%{_bindir}/* \
 %{buildroot}%{_bindir}/
 fi
 
+
 %files
 %defattr(-,root,root,-)
-/usr/lib64/ruby/gems/2.2.0/cache/rack-test-0.6.3.gem
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/MockSession/cdesc-MockSession.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Cookie/cdesc-Cookie.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/CookieJar/cdesc-CookieJar.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Error/cdesc-Error.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Methods/cdesc-Methods.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/MockDigestRequest/cdesc-MockDigestRequest.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/authorize-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/basic_authorize-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/cdesc-Session.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/default_env-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/delete-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/digest_auth_configured%3f-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/digest_auth_header-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/digest_authorize-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/env-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/env_for-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/follow_redirect%21-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/get-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/head-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/header-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/headers_for_env-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/new-c.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/options-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/params_to_string-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/patch-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/post-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/process_request-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/put-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/request-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Session/retry_with_digest_auth%3f-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/UploadedFile/cdesc-UploadedFile.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/UploadedFile/content_type-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/UploadedFile/local_path-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/UploadedFile/new-c.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/UploadedFile/original_filename-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/UploadedFile/path-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/UploadedFile/tempfile-i.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/Utils/cdesc-Utils.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/cdesc-Test.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/Test/encoding_aware_strings%3f-c.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/Rack/cdesc-Rack.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/cache.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/page-MIT-LICENSE_txt.ri
-/usr/lib64/ruby/gems/2.2.0/doc/rack-test-0.6.3/ri/page-README_rdoc.ri
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/.document
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/.gitignore
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/Gemfile
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/Gemfile.lock
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/History.txt
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/MIT-LICENSE.txt
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/README.rdoc
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/Rakefile
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/Thorfile
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/lib/rack/mock_session.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/lib/rack/test.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/lib/rack/test/cookie_jar.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/lib/rack/test/methods.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/lib/rack/test/mock_digest_request.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/lib/rack/test/uploaded_file.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/lib/rack/test/utils.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/rack-test.gemspec
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/spec/fixtures/bar.txt
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/spec/fixtures/config.ru
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/spec/fixtures/fake_app.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/spec/fixtures/foo.txt
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/spec/rack/test/cookie_spec.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/spec/rack/test/digest_auth_spec.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/spec/rack/test/multipart_spec.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/spec/rack/test/uploaded_file_spec.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/spec/rack/test/utils_spec.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/spec/rack/test_spec.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/spec/spec_helper.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/spec/support/matchers/body.rb
-/usr/lib64/ruby/gems/2.2.0/gems/rack-test-0.6.3/spec/support/matchers/challenge.rb
-/usr/lib64/ruby/gems/2.2.0/specifications/rack-test-0.6.3.gemspec
+/usr/lib64/ruby/gems/2.3.0/cache/rack-test-0.6.3.gem
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/.document
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/.gitignore
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/Gemfile
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/Gemfile.lock
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/History.txt
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/MIT-LICENSE.txt
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/README.rdoc
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/Rakefile
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/Thorfile
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/lib/rack/mock_session.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/lib/rack/test.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/lib/rack/test/cookie_jar.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/lib/rack/test/methods.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/lib/rack/test/mock_digest_request.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/lib/rack/test/uploaded_file.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/lib/rack/test/utils.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/rack-test.gemspec
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/spec/fixtures/bar.txt
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/spec/fixtures/config.ru
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/spec/fixtures/fake_app.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/spec/fixtures/foo.txt
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/spec/rack/test/cookie_spec.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/spec/rack/test/digest_auth_spec.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/spec/rack/test/multipart_spec.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/spec/rack/test/uploaded_file_spec.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/spec/rack/test/utils_spec.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/spec/rack/test_spec.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/spec/spec_helper.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/spec/support/matchers/body.rb
+/usr/lib64/ruby/gems/2.3.0/gems/rack-test-0.6.3/spec/support/matchers/challenge.rb
+/usr/lib64/ruby/gems/2.3.0/specifications/rack-test-0.6.3.gemspec
